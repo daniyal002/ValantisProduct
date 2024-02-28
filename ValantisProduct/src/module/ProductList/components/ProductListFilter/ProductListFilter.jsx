@@ -10,6 +10,8 @@ const ProductListFilter = ({
   priceI,
   brandI,
   productI,
+  refeshData,
+  error,
 }) => {
   const { handleSubmit, reset } = useForm();
   const { data: ProductField } = useGetProductField();
@@ -89,6 +91,17 @@ const ProductListFilter = ({
           Применить фильтр
         </button>
       )}
+      {error && (
+        <a
+          onClick={() => {
+            clearFilter();
+            refeshData();
+          }}
+          style={styles.link}
+        >
+          Обновить
+        </a>
+      )}
     </form>
   );
 };
@@ -108,6 +121,7 @@ const styles = {
     fontSize: "16px",
   },
   buttonFilter: {
+    marginTop: "10px",
     padding: "8px 16px",
     backgroundColor: "#007bff",
     color: "#fff",
@@ -118,6 +132,7 @@ const styles = {
     transition: "background-color 0.3s",
   },
   buttonFilterDisabled: {
+    marginTop: "10px",
     padding: "8px 16px",
     backgroundColor: "gray",
     color: "#fff",
@@ -128,6 +143,7 @@ const styles = {
     transition: "background-color 0.3s",
   },
   link: {
+    marginTop: "10px",
     padding: "8px 16px",
     backgroundColor: "#007bff",
     color: "#fff",

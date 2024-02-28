@@ -41,6 +41,7 @@ const ProductListTable = ({ productListItem, isPending }) => {
 
 const styles = {
   productList: {
+    marginTop: "10px",
     maxHeight: "600px",
     overflowY: "scroll",
   },
@@ -48,6 +49,7 @@ const styles = {
     width: "100%",
     borderCollapse: "collapse",
     marginTop: "20px",
+    backgroundColor: "rgb(0, 123, 255)",
   },
   thead: {
     backgroundColor: "#f2f2f2",
@@ -63,6 +65,7 @@ const styles = {
   td: {
     padding: "12px",
     borderBottom: "1px solid #ddd",
+    color: "#fff",
   },
   loading: {
     width: "100%",

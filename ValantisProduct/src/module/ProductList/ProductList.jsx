@@ -53,6 +53,8 @@ const ProductList = () => {
     setCurrentPage(page);
   };
 
+const refeshData = () => mutate({ filterI, brandI, productI, priceI });
+
   return (
     <div>
       <ProductListFilter
@@ -64,6 +66,8 @@ const ProductList = () => {
         setPrice={setPrice}
         priceI={priceI}
         filter={filterI}
+        refeshData={refeshData}
+        error={error}
       />
       <ProductListTable
         productListItem={productListItem}

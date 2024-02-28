@@ -49,7 +49,8 @@ const styles = {
   paginate: {
     display: "flex",
     flexWrap: "wrap",
-    columnGap: "10px",
+    gap: "10px",
+    justifyContent: "center",
     marginTop: "20px",
   },
 };
