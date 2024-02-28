@@ -8,6 +8,7 @@ const ProductList = () => {
   const [brandI, setBrand] = useState("");
   const [priceI, setPrice] = useState("");
   const [filterI, setFilter] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const [productListItem, setProductListItem] = useState([]);
 
@@ -24,8 +25,6 @@ const ProductList = () => {
     } else if (filterI == false) {
       mutate({ filterI, brandI, productI, priceI });
     }
-    console.log(filterI);
-    console.log(filterI, brandI, productI, priceI);
   }, [filterI]);
 
   useEffect(() => {
@@ -42,7 +41,15 @@ const ProductList = () => {
     const startIndex = 50 * (page - 1);
     const endIndex = startIndex + 50;
     const newList = productItem.slice(startIndex, endIndex);
-    setProductListItem(newList);
+    setProductListItem(
+      Object.values(
+        newList.reduce((acc, product) => {
+          acc[product.id] = acc[product.id] || product;
+          return acc;
+        }, {})
+      )
+    );
+    setCurrentPage(page);
   };
 
   return (
@@ -63,7 +70,7 @@ const ProductList = () => {
       />
 
       <div>
-        {productItem && (
+        {productItem && !isPending && (
           <div style={styles.paginate}>
             {/* Создаем кнопки для каждой страницы */}
 
@@ -73,7 +80,11 @@ const ProductList = () => {
                 <button
                   key={index}
                   onClick={() => paginate(index + 1)}
-                  style={styles.button}
+                  style={
+                    currentPage == index + 1
+                      ? styles.buttonPaginateActive
+                      : styles.buttonPaginate
+                  }
                 >
                   {index + 1}
                 </button>
@@ -87,13 +98,25 @@ const ProductList = () => {
 };
 
 const styles = {
-  button: {
+  buttonPaginate: {
     background: "rgb(0, 123, 255)",
     color: "#fff",
     borderRadius: "5px",
-    border: "none",
+    border: "1px solid rgb(0, 123, 255)",
     fontSize: "18px",
     padding: "5px 10px",
+    cursor: "pointer",
+    transition: "0.5s",
+  },
+  buttonPaginateActive: {
+    background: "#fff",
+    color: "rgb(0, 123, 255)",
+    borderRadius: "5px",
+    border: "1px solid rgb(0, 123, 255)",
+    fontSize: "18px",
+    padding: "5px 10px",
+    cursor: "pointer",
+    transition: "0.5s",
   },
   paginate: {
     display: "flex",

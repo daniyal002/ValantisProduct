@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useGetProductField } from "../../hook/useGetProductField";
 import { useForm } from "react-hook-form";
 
@@ -76,7 +75,17 @@ const ProductListFilter = ({
           Очистить фильтр
         </a>
       ) : (
-        <button type="submit" style={styles.button}>
+        <button
+          type="submit"
+          style={
+            priceI != "" || brandI != "" || productI != ""
+              ? styles.buttonFilter
+              : styles.buttonFilterDisabled
+          }
+          disabled={
+            priceI != "" || brandI != "" || productI != "" ? false : true
+          }
+        >
           Применить фильтр
         </button>
       )}
@@ -98,7 +107,7 @@ const styles = {
     borderRadius: "4px",
     fontSize: "16px",
   },
-  button: {
+  buttonFilter: {
     padding: "8px 16px",
     backgroundColor: "#007bff",
     color: "#fff",
@@ -107,11 +116,17 @@ const styles = {
     fontSize: "16px",
     cursor: "pointer",
     transition: "background-color 0.3s",
-    "&:hover": {
-      background: "#0056b3",
-    },
   },
-
+  buttonFilterDisabled: {
+    padding: "8px 16px",
+    backgroundColor: "gray",
+    color: "#fff",
+    border: "none",
+    borderRadius: "4px",
+    fontSize: "16px",
+    cursor: "pointer",
+    transition: "background-color 0.3s",
+  },
   link: {
     padding: "8px 16px",
     backgroundColor: "#007bff",

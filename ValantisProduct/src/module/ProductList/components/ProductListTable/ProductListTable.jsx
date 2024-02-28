@@ -12,32 +12,38 @@ const ProductListTable = ({ productListItem, isPending }) => {
           />
         </div>
       ) : (
-        <table style={styles.table}>
-          <thead style={styles.thead}>
-            <tr>
-              <th style={styles.th}>ID</th>
-              <th style={styles.th}>Продукт</th>
-              <th style={styles.th}>Бренд</th>
-              <th style={styles.th}>Цена</th>
-            </tr>
-          </thead>
-          <tbody>
-            {productListItem.map((item, index) => (
-              <tr style={styles.tr} key={index}>
-                <td style={styles.td}>{item.id}</td>
-                <td style={styles.td}>{item.product}</td>
-                <td style={styles.td}>{item.brand}</td>
-                <td style={styles.td}>{item.price}</td>
+        <div style={styles.productList}>
+          <table style={styles.table}>
+            <thead style={styles.thead}>
+              <tr>
+                <th style={styles.th}>ID</th>
+                <th style={styles.th}>Продукт</th>
+                <th style={styles.th}>Цена</th>
+                <th style={styles.th}>Бренд</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {productListItem.map((item, index) => (
+                <tr style={styles.tr} key={index}>
+                  <td style={styles.td}>{item.id}</td>
+                  <td style={styles.td}>{item.product}</td>
+                  <td style={styles.td}>{item.price}</td>
+                  <td style={styles.td}>{item.brand}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </>
   );
 };
 
 const styles = {
+  productList: {
+    maxHeight: "600px",
+    overflowY: "scroll",
+  },
   table: {
     width: "100%",
     borderCollapse: "collapse",
@@ -45,6 +51,8 @@ const styles = {
   },
   thead: {
     backgroundColor: "#f2f2f2",
+    position: "sticky",
+    top: "0",
   },
   th: {
     padding: "12px",
@@ -55,11 +63,6 @@ const styles = {
   td: {
     padding: "12px",
     borderBottom: "1px solid #ddd",
-  },
-  tr: {
-    ":nthChild(even):": {
-      backgroundColor: "#f2f2f2",
-    },
   },
   loading: {
     width: "100%",
